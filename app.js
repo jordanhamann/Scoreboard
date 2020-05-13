@@ -24,12 +24,12 @@ app.get("/", function(req, res){
 });
 
 // New Game Form
-app.get("/game/new", function(req, res){
+app.get("/games/new", function(req, res){
     res.render("games/new");
 });
 
-app.post("/game/new", function(req, res){
-    
+app.post("/games/new", function(req, res){
+    var hostName = req.body.
 })
 
 

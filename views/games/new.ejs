@@ -2,23 +2,23 @@
 
 <h1>Host a New Game</h1>
 
-<form action="">
+<form action="/games/new" method="POST">
     <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Game Title" aria-label="Game Title">
+        <input type="text" class="form-control" placeholder="Game Title" aria-label="Game Title" name="gameTitle">
     </div>
     
     <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Host's Name" aria-label="Host's Name">
+        <input type="text" class="form-control" placeholder="Host's Name" aria-label="Host's Name" name="hostName">
     </div>
     
     <div class="form-check">
-        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+        <input class="form-check-input" type="radio" name="scoringMethod" id="exampleRadios1" value="highestWins" checked>
         <label class="form-check-label" for="exampleRadios1">
             Highest Score Wins
         </label>
     </div>
     <div class="form-check">
-        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+        <input class="form-check-input" type="radio" name="scoringMethod" id="exampleRadios2" value="lowestWins">
         <label class="form-check-label" for="exampleRadios2">
             Lowest Score Wins
         </label>

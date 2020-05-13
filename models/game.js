@@ -10,6 +10,10 @@ const gameSchema = new mongoose.Schema({
     required: [true, 'Created date is required'],
     default: Date.now
   },
+  roomCode: {
+    type: String,
+    required: [true, 'room code is required']
+  },
   players: [
     {
       type: mongoose.Schema.Types.ObjectId,
