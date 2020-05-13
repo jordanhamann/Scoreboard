@@ -14,7 +14,7 @@ app.use(express.static('./'));
 
 //Database setup
 mongoose.set('useUnifiedTopology', true); 
-// mongoose.connect("mongodb://localhost/TitanConnectV1",{ useNewUrlParser: true });
+mongoose.connect("mongodb+srv://JordanHamann:4Given94@titan-connect-j-vbzvk.mongodb.net/scoreboardApp?retryWrites=true&w=majority",{ useNewUrlParser: true });
 
 // ##########################  ROUTES  ##########################################
 
@@ -29,7 +29,24 @@ app.get("/games/new", function(req, res){
 });
 
 app.post("/games/new", function(req, res){
-    var hostName = req.body.
+    var hostName = req.body.hostName;
+    var gameTitle = req.body.gameTitle;
+    var scoringMethod = req.body.scoringMethod;
+    console.log(hostName);
+    console.log(gameTitle);
+    console.log(scoringMethod);
+
+    var newGame = {gameTitle: gameTitle, roomCode: "AAAA"};
+
+    Game.create(newGame, function(err, newlyCreatedGame){
+        if(err){
+            console.log(err);
+        } else {
+            console.log(newlyCreatedGame);
+        }
+    });
+
+    res.render("games/new");
 })
 
 
