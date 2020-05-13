@@ -2,12 +2,28 @@
 
 <h1>Host a New Game</h1>
 
-<div class="input-group mb-3">
-    <input type="text" class="form-control" placeholder="Game Title" aria-label="Game Title">
-</div>
+<form action="">
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Game Title" aria-label="Game Title">
+    </div>
+    
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Host's Name" aria-label="Host's Name">
+    </div>
+    
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+        <label class="form-check-label" for="exampleRadios1">
+            Highest Score Wins
+        </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+        <label class="form-check-label" for="exampleRadios2">
+            Lowest Score Wins
+        </label>
+    </div>
+</form>
 
-<div class="input-group mb-3">
-    <input type="text" class="form-control" placeholder="Host's Name" aria-label="Host's Name">
-</div>
 
-  <%- include("../partials/footer") %>
+<%- include("../partials/footer") %>

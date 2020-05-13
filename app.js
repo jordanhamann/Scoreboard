@@ -4,6 +4,10 @@ var express = require("express"),
     moment = require("moment"),
     mongoose = require("mongoose");
 
+//Mongoose Models from module.export
+var User = require("./models/user");
+var Game = require("./models/game");
+
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('./'));
@@ -12,15 +16,24 @@ app.use(express.static('./'));
 mongoose.set('useUnifiedTopology', true); 
 // mongoose.connect("mongodb://localhost/TitanConnectV1",{ useNewUrlParser: true });
 
-//ROUTES
+// ##########################  ROUTES  ##########################################
+
+// Landing Page
 app.get("/", function(req, res){
     res.render("home");
 });
 
-app.get("/new", function(req, res){
+// New Game Form
+app.get("/game/new", function(req, res){
     res.render("games/new");
 });
 
+app.post("/game/new", function(req, res){
+    
+})
+
+
+// ######################### Start App ##############################
 app.listen(3000, function(){
     console.log("Scoreboard server is listening on port 3000");
 });
