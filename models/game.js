@@ -14,6 +14,10 @@ const gameSchema = new mongoose.Schema({
     type: String,
     required: [true, 'room code is required']
   },
+  scoringMethod: {
+    type: String,
+    required: [true, 'Scoring Method is required']
+  },
   players: [
     {
       type: mongoose.Schema.Types.ObjectId,

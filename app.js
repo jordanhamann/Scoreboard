@@ -36,7 +36,7 @@ app.post("/games/new", function(req, res){
     console.log(gameTitle);
     console.log(scoringMethod);
 
-    var newGame = {gameTitle: gameTitle, roomCode: "AAAA"};
+    var newGame = {gameTitle: gameTitle, roomCode: "AAAA", scoringMethod: scoringMethod};
 
     Game.create(newGame, function(err, newlyCreatedGame){
         if(err){
@@ -46,7 +46,7 @@ app.post("/games/new", function(req, res){
         }
     });
 
-    res.render("games/new");
+    res.render("games/index", {gameTitle: gameTitle});
 })
 
 
