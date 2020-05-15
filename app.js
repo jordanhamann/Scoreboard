@@ -28,6 +28,32 @@ app.get("/games/new", function(req, res){
     res.render("games/new");
 });
 
+// Join Game Form
+app.get("/join", function(req, res){
+    res.render("join");
+});
+
+app.post("/join", function(req, res){
+    var roomCode = req.body.roomCode;
+    var name = req.body.name;
+    User.create({username: name}, function(err, createdUser){
+        if(err){
+            console.log(err)
+        } else {
+            Game.findOne({roomCode: req.body.roomCode}, function(err, foundGame){
+                if(err){
+                    console.log(err)
+                } else {
+                    foundGame.players.push(createdUser);
+                    foundGame.save();
+                }
+            })
+            res.render("join");
+        }
+    })
+
+});
+
 app.post("/games/new", function(req, res){
     var hostName = req.body.hostName;
     var gameTitle = req.body.gameTitle;
@@ -36,7 +62,7 @@ app.post("/games/new", function(req, res){
     console.log(gameTitle);
     console.log(scoringMethod);
 
-    var newGame = {gameTitle: gameTitle, roomCode: "AAAA", scoringMethod: scoringMethod};
+    var newGame = {gameTitle: gameTitle, roomCode: "BBBB", scoringMethod: scoringMethod};
 
     Game.create(newGame, function(err, newlyCreatedGame){
         if(err){

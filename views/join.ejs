@@ -1,0 +1,19 @@
+<%- include("partials/header") %>
+
+<h1>Join A Game</h1>
+
+<form action="/join" method="POST">
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Room Code" aria-label="Game Title" name="roomCode">
+    </div>
+    
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Name" aria-label="Name" name="name">
+    </div>
+    <div class="form-group">
+        <button class="btn btn-lg btn-default btn-block btn-primary">Submit</button>
+    </div>
+</form>
+
+
+<%- include("partials/footer") %>
