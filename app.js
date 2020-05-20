@@ -40,15 +40,15 @@ app.post("/join", function(req, res){
         if(err){
             console.log(err)
         } else {
-            Game.findOne({roomCode: req.body.roomCode}, function(err, foundGame){
+            Game.findOne({roomCode: req.body.roomCode}).populate("players").exec(function(err, foundGame){
                 if(err){
                     console.log(err)
                 } else {
                     foundGame.players.push(createdUser);
-                    foundGame.save();
+                    foundGame.save().then(res.render("games/waitingRoom", {game: foundGame}));
+                    
                 }
             })
-            res.render("join");
         }
     })
 
@@ -62,17 +62,27 @@ app.post("/games/new", function(req, res){
     console.log(gameTitle);
     console.log(scoringMethod);
 
-    var newGame = {gameTitle: gameTitle, roomCode: "BBBB", scoringMethod: scoringMethod};
+    roomCode = generateRoomCode();
 
-    Game.create(newGame, function(err, newlyCreatedGame){
+    var newGame = {gameTitle: gameTitle, roomCode: roomCode, scoringMethod: scoringMethod};
+
+    User.create({username: hostName, isHost: true}, function(err, createdUser){
         if(err){
-            console.log(err);
+            console.log(err)
         } else {
-            console.log(newlyCreatedGame);
+            Game.create(newGame, function(err, newlyCreatedGame){
+                if(err){
+                    console.log(err);
+                } else {
+                    console.log(newlyCreatedGame);
+                    newlyCreatedGame.players.push(createdUser);
+                    newlyCreatedGame.save();
+                    res.render("games/index", {game: newlyCreatedGame});
+                }
+            });
         }
-    });
+    })
 
-    res.render("games/index", {gameTitle: gameTitle});
 })
 
 
@@ -80,3 +90,14 @@ app.post("/games/new", function(req, res){
 app.listen(3000, function(){
     console.log("Scoreboard server is listening on port 3000");
 });
+
+
+// ######################## Functions ################################
+function generateRoomCode(){
+    var roomcode = "";
+    var letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+    for(var i=0; i<4; i++){
+        roomcode = roomcode + letters[Math.floor(Math.random()*letters.length)];
+    }
+    return roomcode;
+}
